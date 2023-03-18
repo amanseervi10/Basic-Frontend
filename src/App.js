@@ -1,13 +1,13 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './Screen.css'
-import Form from './components/Form'
-
-
+import Updater from './components/Updater'
+import userEvent from '@testing-library/user-event';
 
 function App() {
+
   return (
     <div className='Screen'>
-      <Form />
+      <Updater />
     </div>
   );
 }

@@ -1,5 +1,8 @@
 .Screen{
     display: flex;
+    width: 40vw;
+    flex-direction: column;
+    margin: auto;
     justify-content: center;
     align-items: center;
 }

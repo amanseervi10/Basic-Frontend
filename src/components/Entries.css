@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;1,200&family=Rock+Salt&display=swap');
+
+
+.data_div{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.data_entry{
+    background-color: white;
+    padding: 15px 15px;
+    border-radius: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 1000;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
