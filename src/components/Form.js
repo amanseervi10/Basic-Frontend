@@ -46,6 +46,7 @@ const Form = (props) => {
             type="text"
             id="username-input"
             className="input_field"
+            size="60"
             value={username}
             onChange={handleNameChange}
           />
