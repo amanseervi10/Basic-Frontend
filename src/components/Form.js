@@ -1,4 +1,3 @@
-//will reject negative age
 import React, { useState } from "react";
 import "./Form.css";
 
@@ -46,7 +45,7 @@ const Form = (props) => {
           <input
             type="text"
             id="username-input"
-            size="60"
+            className="input_field"
             value={username}
             onChange={handleNameChange}
           />
@@ -60,6 +59,7 @@ const Form = (props) => {
           <input
             type="number"
             id="age-input"
+            className="input_field"
             value={age}
             onChange={handleAgeChange}
           />
