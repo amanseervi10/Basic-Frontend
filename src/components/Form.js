@@ -1,42 +1,68 @@
+//will reject negative age
 import React, { useState } from "react";
 import "./Form.css";
 
 const Form = (props) => {
-  const [username, setuserName] = useState("")
+  const [username, setUsername] = useState("");
   const [age, setAge] = useState("");
 
-  const NameChange = (event) => {
-    setuserName(event.target.value);
+  const handleNameChange = (event) => {
+    setUsername(event.target.value);
   };
 
-  const ageChange = (event) => {
-    setAge(event.target.value);
-  };
-
-  const FormSubmitHandler = (event) => {
-    event.preventDefault();
-    const newUser={
-        name: username,
-        age:age
+  const handleAgeChange = (event) => {
+    const ageValue = event.target.value;
+    if (ageValue < 0) {
+      return;
     }
-    setAge('');
-    setuserName('')
+    setAge(ageValue);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    // Validation
+    if (username.trim() === "" || age === "") {
+      return;
+    }
+
+    const newUser = {
+      name: username,
+      age: age,
+    };
+    setAge("");
+    setUsername("");
     props.changeOfData(newUser);
   };
 
   return (
     <div className="Form">
-      <form className="form_inside" onSubmit={FormSubmitHandler}>
+      <form className="form_inside" onSubmit={handleSubmit}>
         <div className="input_elements">
-          <label className="input_label">Username</label>
-          <br></br>
-          <input type="text" size="60" value={username} onChange={NameChange}></input>
+          <label className="input_label" htmlFor="username-input">
+            Username
+          </label>
+          <br />
+          <input
+            type="text"
+            id="username-input"
+            size="60"
+            value={username}
+            onChange={handleNameChange}
+          />
         </div>
-        <br></br>
+        <br />
         <div className="input_elements">
-          <label className="input_label">Age (Years)</label>
-          <br></br>
-          <input type="number" value={age} onChange={ageChange}></input>
+          <label className="input_label" htmlFor="age-input">
+            Age (Years)
+          </label>
+          <br />
+          <input
+            type="number"
+            id="age-input"
+            value={age}
+            onChange={handleAgeChange}
+          />
         </div>
         <button className="button">Submit</button>
       </form>
@@ -45,3 +71,4 @@ const Form = (props) => {
 };
 
 export default Form;
+
