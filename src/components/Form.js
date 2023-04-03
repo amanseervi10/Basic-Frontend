@@ -49,7 +49,6 @@ const Form = (props) => {
           <label className="input_label" htmlFor="username-input">
             Username
           </label>
-          <br />
           <input
             type="text"
             id="username-input"
@@ -57,23 +56,28 @@ const Form = (props) => {
             className="input_field"
             value={username}
             onChange={handleNameChange}
+            required
           />
         </div>
-        <br />
+
         <div className="input_elements">
           <label className="input_label" htmlFor="age-input">
             Age (Years)
           </label>
-          <br />
           <input
             type="number"
             id="age-input"
             value={age}
             className="input_field"
             onChange={handleAgeChange}
+            required
           />
         </div>
-        <button className="button">Submit</button>
+
+        <button className="button" type="submit">
+          Submit
+        </button>
+
         {errorMessage && <p className="error">{errorMessage}</p>}
       </form>
     </div>
@@ -81,3 +85,4 @@ const Form = (props) => {
 };
 
 export default Form;
+
