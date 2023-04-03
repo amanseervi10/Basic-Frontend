@@ -4,6 +4,7 @@ import "./Form.css";
 const Form = (props) => {
   const [username, setUsername] = useState("");
   const [age, setAge] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleNameChange = (event) => {
     setUsername(event.target.value);
@@ -12,16 +13,23 @@ const Form = (props) => {
   const handleAgeChange = (event) => {
     const ageValue = event.target.value;
     if (ageValue < 0) {
-      return;
+      setErrorMessage("Invalid age value");
+    } else {
+      setAge(ageValue);
+      setErrorMessage("");
     }
-    setAge(ageValue);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
     // Validation
-    if (username.trim() === "" || age === "") {
+    if (username.trim() === "") {
+      setErrorMessage("Empty username field");
+      return;
+    }
+    if (age === "") {
+      setErrorMessage("Empty age field");
       return;
     }
 
@@ -45,7 +53,6 @@ const Form = (props) => {
           <input
             type="text"
             id="username-input"
-            className="input_field"
             size="60"
             value={username}
             onChange={handleNameChange}
@@ -60,16 +67,15 @@ const Form = (props) => {
           <input
             type="number"
             id="age-input"
-            className="input_field"
             value={age}
             onChange={handleAgeChange}
           />
         </div>
         <button className="button">Submit</button>
+        {errorMessage && <p className="error">{errorMessage}</p>}
       </form>
     </div>
   );
 };
 
 export default Form;
-
