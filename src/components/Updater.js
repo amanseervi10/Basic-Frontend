@@ -5,6 +5,8 @@ import Entries from "./Entries";
 const Initialdata = [
   { name: "Aman", age: 19 },
   { name: "Ankit", age: 19 },
+  { name: "Junaid", age: 20 },
+  { name: "Naman", age: 20 },
 ];
 
 const Updater = () => {

@@ -2,46 +2,87 @@ import React, { useState } from "react";
 import "./Form.css";
 
 const Form = (props) => {
-  const [username, setuserName] = useState("")
+  const [username, setUsername] = useState("");
   const [age, setAge] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
-  const NameChange = (event) => {
-    setuserName(event.target.value);
+  const handleNameChange = (event) => {
+    setUsername(event.target.value);
   };
 
-  const ageChange = (event) => {
-    setAge(event.target.value);
-  };
-
-  const FormSubmitHandler = (event) => {
-    event.preventDefault();
-    const newUser={
-        name: username,
-        age:age
+  const handleAgeChange = (event) => {
+    const ageValue = event.target.value;
+    if (ageValue < 0) {
+      setErrorMessage("Invalid age value");
+    } else {
+      setAge(ageValue);
+      setErrorMessage("");
     }
-    setAge('');
-    setuserName('')
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    // Validation
+    if (username.trim() === "") {
+      setErrorMessage("Empty username field");
+      return;
+    }
+    if (age === "") {
+      setErrorMessage("Empty age field");
+      return;
+    }
+
+    const newUser = {
+      name: username,
+      age: age,
+    };
+    setAge("");
+    setUsername("");
     props.changeOfData(newUser);
   };
 
   return (
     <div className="Form">
-      <form className="form_inside" onSubmit={FormSubmitHandler}>
+      <form className="form_inside" onSubmit={handleSubmit}>
         <div className="input_elements">
-          <label className="input_label">Username</label>
-          <br></br>
-          <input type="text" size="60" value={username} onChange={NameChange}></input>
+          <label className="input_label" htmlFor="username-input">
+            Username
+          </label>
+          <input
+            type="text"
+            id="username-input"
+            size="60"
+            className="input_field"
+            value={username}
+            onChange={handleNameChange}
+            required
+          />
         </div>
-        <br></br>
+
         <div className="input_elements">
-          <label className="input_label">Age (Years)</label>
-          <br></br>
-          <input type="number" value={age} onChange={ageChange}></input>
+          <label className="input_label" htmlFor="age-input">
+            Age (Years)
+          </label>
+          <input
+            type="number"
+            id="age-input"
+            value={age}
+            className="input_field"
+            onChange={handleAgeChange}
+            required
+          />
         </div>
-        <button className="button">Submit</button>
+
+        <button className="button" type="submit">
+          Submit
+        </button>
+
+        {errorMessage && <p className="error">{errorMessage}</p>}
       </form>
     </div>
   );
 };
 
 export default Form;
+
